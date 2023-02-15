@@ -1,3 +1,12 @@
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Header } from "./components/Header";
+import { darkTheme } from "./styles/darkTheme";
+
 export function App () {
-  return <h1>Hello World!</h1>
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Header />
+    </ThemeProvider>
+  )
 }
