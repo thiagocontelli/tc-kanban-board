@@ -23,7 +23,7 @@ export function Header () {
           TC Kanban Board
         </Typography>
         <Button 
-          variant="outlined"
+          variant="contained"
           startIcon={<AddIcon />}
         >
           Add another list
