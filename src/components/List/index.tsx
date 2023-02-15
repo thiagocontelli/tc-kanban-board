@@ -2,14 +2,16 @@ import AddIcon from '@mui/icons-material/Add';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Button, Typography } from "@mui/material";
+import { ICard } from '../../hooks/useKanban';
 import { Card } from "../Card";
 import { Menu } from "../Menu";
 
 interface ListProps {
   title: string;
+  cards: ICard[]
 }
 
-export function List({ title }: ListProps) {
+export function List({ title, cards }: ListProps) {
   return (
     <Box
       minWidth='256px'
@@ -50,7 +52,7 @@ export function List({ title }: ListProps) {
         gap='1rem'
         alignItems='center'
       >
-        {Array(2).fill(1).map(item => <Card />)}
+        {cards.map(card => <Card key={card.id} title={card.title} />)}
         <Button
           fullWidth
           variant='outlined'
