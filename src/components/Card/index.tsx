@@ -5,7 +5,7 @@ export function Card() {
   return (
     <CardMui
       sx={{
-        width: '200px'
+        width: '100%'
       }}
     >
       <CardMedia
