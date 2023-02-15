@@ -1,7 +1,11 @@
 import { Card as CardMui, CardContent, CardMedia, Typography } from "@mui/material";
 import Constants from '../../constants'
 
-export function Card() {
+interface CardProps {
+  title: string
+}
+
+export function Card({ title }: CardProps) {
   return (
     <CardMui
       sx={{
@@ -15,7 +19,7 @@ export function Card() {
       />
       <CardContent>
         <Typography>
-          15 - Refactor class to Typescript
+          {title}
         </Typography>
       </CardContent>
     </CardMui>
