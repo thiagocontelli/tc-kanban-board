@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import { useState } from 'react';
 import { ICard, IList, useKanban } from '../../hooks/useKanban';
 import { AddCardModal } from '../AddCardModal';
@@ -16,6 +16,7 @@ interface ListProps {
 export function List({ list, cards }: ListProps) {
   const h = useKanban()
   const [isOpen, setIsOpen] = useState(false)
+  const theme = useTheme()
   
   return (
     <Box
@@ -23,11 +24,19 @@ export function List({ list, cards }: ListProps) {
       display='flex'
       flexDirection='column'
       gap='1rem'
+      maxHeight='75vh'
+      overflow='auto'
+      sx={{ overflowX: 'hidden' }}
     >
       <Box
         display='flex'
         alignItems='center'
         justifyContent='space-between'
+        position='sticky'
+        top='0'
+        sx={{
+          background: theme.palette.background.default
+        }}
       >
         <Typography
           fontFamily='Poppins'
@@ -58,16 +67,21 @@ export function List({ list, cards }: ListProps) {
         alignItems='center'
       >
         {cards.map(card => <Card key={card.id} title={card.title} />)}
-        <Button
-          fullWidth
-          variant='outlined'
-          startIcon={<AddIcon />}
-          size='small'
-          onClick={() => { setIsOpen(true) }}
-        >
-          Add another card
-        </Button>
       </Box>
+      <Button
+        fullWidth
+        variant='outlined'
+        startIcon={<AddIcon />}
+        size='small'
+        onClick={() => { setIsOpen(true) }}
+        sx={{
+          position: 'sticky',
+          bottom: '0',
+          background: theme.palette.background.default
+        }}
+      >
+        Add another card
+      </Button>
 
       <AddCardModal
         isOpen={isOpen}
