@@ -17,6 +17,7 @@ interface IKanbanContext {
   addList(title: string): void;
   deleteList(id: string): void;
   addCard(title: string, listId: string): void;
+  clearList(listId: string): void;
 }
 
 interface KanbanContextProviderProps {
@@ -59,6 +60,17 @@ export function KanbanContextProvider({ children }: KanbanContextProviderProps) 
     })
     setLists(newLists)
   }
+
+  function clearList(listId: string) {
+    const listsCopy = [...lists]
+    const newLists = listsCopy.map(list => {
+      if (list.id === listId) {
+        return { ...list, cards: [] }
+      }
+      return list
+    })
+    setLists(newLists)
+  }
   
   return (
     <KanbanContext.Provider 
@@ -66,7 +78,8 @@ export function KanbanContextProvider({ children }: KanbanContextProviderProps) 
         lists,
         addList,
         deleteList,
-        addCard
+        addCard,
+        clearList
       }}
     >
       {children}
