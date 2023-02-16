@@ -2,7 +2,9 @@ import AddIcon from '@mui/icons-material/Add';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Button, Typography } from "@mui/material";
+import { useState } from 'react';
 import { ICard, IList, useKanban } from '../../hooks/useKanban';
+import { AddCardModal } from '../AddCardModal';
 import { Card } from "../Card";
 import { Menu } from "../Menu";
 
@@ -13,6 +15,7 @@ interface ListProps {
 
 export function List({ list, cards }: ListProps) {
   const h = useKanban()
+  const [isOpen, setIsOpen] = useState(false)
   
   return (
     <Box
@@ -60,11 +63,20 @@ export function List({ list, cards }: ListProps) {
           variant='outlined'
           startIcon={<AddIcon />}
           size='small'
-          onClick={() => { /* TODO */ }}
+          onClick={() => { setIsOpen(true) }}
         >
           Add another card
         </Button>
       </Box>
+
+      <AddCardModal
+        isOpen={isOpen}
+        handleClose={() => { setIsOpen(false) }}
+        handleSubmit={(inputValue: string) => { 
+          h.addCard(inputValue, list.id); 
+          setIsOpen(false);
+        }}
+      />
     </Box>
   )
 }
