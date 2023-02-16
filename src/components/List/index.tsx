@@ -77,7 +77,10 @@ export function List({ list, cards }: ListProps) {
         sx={{
           position: 'sticky',
           bottom: '0',
-          background: theme.palette.background.default
+          background: theme.palette.background.default,
+          '&:hover': {
+            background: theme.palette.background.default
+          }
         }}
       >
         Add another card
