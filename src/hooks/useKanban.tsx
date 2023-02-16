@@ -15,6 +15,7 @@ export interface IList {
 interface IKanbanContext {
   lists: IList[];
   addList(title: string): void;
+  deleteList(id: string): void;
 }
 
 interface KanbanContextProviderProps {
@@ -40,12 +41,19 @@ export function KanbanContextProvider({ children }: KanbanContextProviderProps) 
     }
     setLists(state => [...state, newList])
   }
+
+  function deleteList(id: string) {
+    const listsCopy = [...lists]
+    const newLists = listsCopy.filter(list => list.id !== id)
+    setLists(newLists)
+  }
   
   return (
     <KanbanContext.Provider 
       value={{
         lists,
-        addList
+        addList,
+        deleteList
       }}
     >
       {children}
