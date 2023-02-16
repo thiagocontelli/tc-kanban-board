@@ -47,6 +47,7 @@ export function Header() {
               value={inputValue}
               autoFocus
               onChange={(e) => setInputValue(e.target.value)}
+              inputProps={{ maxLength: 25 }}
             />
             <IconButton
               onClick={() => {

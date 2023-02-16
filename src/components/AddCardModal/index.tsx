@@ -29,6 +29,7 @@ export function AddCardModal({
           fullWidth
           variant="filled"
           onChange={e => setInputValue(e.target.value)}
+          inputProps={{ maxLength: 50 }}
         />
       </DialogContent>
       <DialogActions>
