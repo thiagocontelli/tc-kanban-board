@@ -16,6 +16,7 @@ interface IKanbanContext {
   lists: IList[];
   addList(title: string): void;
   deleteList(id: string): void;
+  addCard(title: string, listId: string): void;
 }
 
 interface KanbanContextProviderProps {
@@ -47,13 +48,25 @@ export function KanbanContextProvider({ children }: KanbanContextProviderProps) 
     const newLists = listsCopy.filter(list => list.id !== id)
     setLists(newLists)
   }
+
+  function addCard(title: string, listId: string) {
+    const listsCopy = [...lists]
+    const newLists = listsCopy.map(list => {
+      if (list.id === listId) {
+        return { ...list, cards: [ ...list.cards, { id: uuidv4(), title } ] }
+      }
+      return list
+    })
+    setLists(newLists)
+  }
   
   return (
     <KanbanContext.Provider 
       value={{
         lists,
         addList,
-        deleteList
+        deleteList,
+        addCard
       }}
     >
       {children}
