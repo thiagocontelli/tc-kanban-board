@@ -45,6 +45,7 @@ export function Header() {
               size="small"
               label="Card title"
               value={inputValue}
+              autoFocus
               onChange={(e) => setInputValue(e.target.value)}
             />
             <IconButton
