@@ -41,7 +41,7 @@ export function List({ list, cards }: ListProps) {
             {
               label: 'Clear list',
               icon: <ClearAllIcon sx={{ fontSize: '1.25rem' }} />,
-              onClick: () => { /* TODO */ }
+              onClick: () => { h.clearList(list.id) }
             },
             {
               label: 'Delete list',
