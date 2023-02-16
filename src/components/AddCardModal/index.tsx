@@ -33,7 +33,13 @@ export function AddCardModal({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button variant="contained" onClick={() => handleSubmit(inputValue)}>
+        <Button
+          variant="contained"
+          onClick={() => {
+            handleSubmit(inputValue)
+            setInputValue('')
+          }}
+        >
           Add
         </Button>
       </DialogActions>
