@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import {v4 as uuidv4} from 'uuid';
 
 export interface ICard {
@@ -12,7 +12,17 @@ export interface IList {
   cards: ICard[]
 }
 
-export function useKanban() {
+interface IKanbanContext {
+  lists: IList[];
+}
+
+interface KanbanContextProviderProps {
+  children: ReactNode;
+}
+
+const KanbanContext = createContext({} as IKanbanContext)
+
+export function KanbanContextProvider({ children }: KanbanContextProviderProps) {
   const [lists, setLists] = useState<IList[]>([
     {
       id: uuidv4(),
@@ -21,7 +31,17 @@ export function useKanban() {
     }
   ])
   
-  return {
-    lists
-  }
+  return (
+    <KanbanContext.Provider 
+      value={{
+        lists
+      }}
+    >
+      {children}
+    </KanbanContext.Provider>
+  )
+}
+
+export function useKanban() {
+  return useContext(KanbanContext)
 }
