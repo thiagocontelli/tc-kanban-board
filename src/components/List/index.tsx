@@ -2,16 +2,18 @@ import AddIcon from '@mui/icons-material/Add';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Button, Typography } from "@mui/material";
-import { ICard } from '../../hooks/useKanban';
+import { ICard, IList, useKanban } from '../../hooks/useKanban';
 import { Card } from "../Card";
 import { Menu } from "../Menu";
 
 interface ListProps {
-  title: string;
+  list: IList;
   cards: ICard[]
 }
 
-export function List({ title, cards }: ListProps) {
+export function List({ list, cards }: ListProps) {
+  const h = useKanban()
+  
   return (
     <Box
       minWidth='256px'
@@ -29,7 +31,7 @@ export function List({ title, cards }: ListProps) {
           fontWeight='bold'
           fontSize='1.25rem'
         >
-          {title}
+          {list.title}
         </Typography>
         <Menu
           menuItems={[
@@ -41,7 +43,7 @@ export function List({ title, cards }: ListProps) {
             {
               label: 'Delete list',
               icon: <DeleteIcon sx={{ fontSize: '1.25rem' }} />,
-              onClick: () => { /* TODO */ }
+              onClick: () => { h.deleteList(list.id)}
             }
           ]}
         />
