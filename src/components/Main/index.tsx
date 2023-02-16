@@ -14,7 +14,7 @@ export function Main() {
       padding="2rem"
     >
       {h.lists.map((list) => (
-        <List key={list.id} title={list.title} cards={list.cards} />
+        <List key={list.id} list={list} cards={list.cards} />
       ))}
     </Box>
   );
