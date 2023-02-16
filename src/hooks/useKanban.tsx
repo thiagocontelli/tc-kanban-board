@@ -14,6 +14,7 @@ export interface IList {
 
 interface IKanbanContext {
   lists: IList[];
+  addList(title: string): void;
 }
 
 interface KanbanContextProviderProps {
@@ -30,11 +31,21 @@ export function KanbanContextProvider({ children }: KanbanContextProviderProps) 
       cards: []
     }
   ])
+
+  function addList(title: string) {
+    const newList = {
+      id: uuidv4(),
+      title,
+      cards: []
+    }
+    setLists(state => [...state, newList])
+  }
   
   return (
     <KanbanContext.Provider 
       value={{
-        lists
+        lists,
+        addList
       }}
     >
       {children}
