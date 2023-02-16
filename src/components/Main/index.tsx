@@ -10,7 +10,7 @@ export function Main() {
       display="flex"
       overflow="auto"
       gap="3rem"
-      minHeight="calc(100vh - 86px)"
+      minHeight="calc(100vh - 105px)"
       padding="2rem"
     >
       {h.lists.map((list) => (
